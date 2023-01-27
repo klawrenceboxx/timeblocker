@@ -12,8 +12,7 @@ function Tasks() {
   const [todos, setTodos] = useState([]);
   const [todoText, setTodoText] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     setTodos([
       ...todos,
       { text: todoText, key: todos.length.toString(), checked: false },
@@ -21,9 +20,9 @@ function Tasks() {
     setTodoText("");
   };
 
-  const handleChange = (e) => {
-    setTodoText(e.target.value);
-  };
+  //   const handleChange = (e) => {
+  //     setTodoText(e.target.value);
+  //   };
 
   const handleCheck = (index) => {
     let newTodos = [...todos];
@@ -38,11 +37,21 @@ function Tasks() {
   };
 
   return (
-    <View>
-      <TextInput value={todoText} onChangeText={handleChange} />
+    <View style={{ flex: 1, padding: 20 }}>
+      <TextInput
+        style={{
+          height: 40,
+          borderColor: "gray",
+          borderWidth: 1,
+          marginBottom: 20,
+        }}
+        value={todoText}
+        onChangeText={(text) => setTodoText(text)}
+      />
       <TouchableOpacity onPress={handleSubmit}>
         <Text>Add Todo</Text>
       </TouchableOpacity>
+      {/* <FlatList */}
       {todos.map((todo, index) => (
         <View key={todo.key}>
           <TextInput
